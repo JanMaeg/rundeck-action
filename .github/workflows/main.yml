@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: Job to test the action
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Trigger rundeck job and wait for finish
+        uses: ./ # Uses an action in the root directory
+        id: rundeck-job
+        with:
+          job_id: '78856e27-97bd-44de-b052-58767be27a60'
+          wait_until_finished: "true"
+        env:
+          RUNDECK_AUTH_TOKEN: ${{ secrets.RUNDECK_API_TOKEN }}
+          RUNDECK_URL: "https://rundeck.janmd.de"
+          TIMEOUT_BETWEEN_STATUS_CHECK: 200

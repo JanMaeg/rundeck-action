@@ -1,0 +1,13 @@
+name: 'Rundeck Action'
+description: 'Start Rundeck jobs from within Github Actions'
+inputs:
+  job_id:  # id of input
+    description: 'The id of the job that should be executed'
+    required: true
+  wait_until_finished:
+    description: 'Waits until the Rundeck Job is finished by calling the Rundeck API'
+    required: false
+    default: "true"
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
